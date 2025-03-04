@@ -38,6 +38,25 @@ App.get("/product/:id", (req, res) => {
     }
 })
 
+App.delete("/deleteproduct/:id", (req, res) => {
+    const ID = req.params.id;
+    const idx = products.findIndex(ind => ind.id = ID);
+    if (idx == -1) {
+        res.status(400).json({
+            status: "fail",
+            message: "product not found"
+        })
+    }
+    else {
+        const deletedData = products.splice(idx, 1);
+        res.status(400).json({
+            status: "success",
+            message: "product deleted",
+            data: deletedData
+        })
+    }
+})
+
 App.post("/product", (req, res) => {
     const {title, price, quantity} = req.body;
 
